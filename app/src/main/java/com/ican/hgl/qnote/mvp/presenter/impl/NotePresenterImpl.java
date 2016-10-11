@@ -1,18 +1,15 @@
 package com.ican.hgl.qnote.mvp.presenter.impl;
 
-import android.database.Cursor;
-
-import com.ican.hgl.qnote.mvp.presenter.QNListPresenter;
+import com.ican.hgl.qnote.mvp.presenter.NotePresenter;
 
 /**
  * Created by hgl on 16-10-7.
  */
 
-public class QNListPresenterImpl implements QNListPresenter {
-
+public class NotePresenterImpl implements NotePresenter {
     @Override
-    public Cursor getNoteList() {
-        return null;
+    public void getNoteDetail(long id) {
+
     }
 
     @Override

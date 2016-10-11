@@ -6,6 +6,6 @@ import android.database.Cursor;
  * Created by hgl on 16-10-7.
  */
 
-public interface QNListPresenter extends IPresenter {
+public interface NoteListPresenter extends IPresenter {
     Cursor getNoteList();
 }
