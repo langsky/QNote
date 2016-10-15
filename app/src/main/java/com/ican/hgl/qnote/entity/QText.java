@@ -1,4 +1,4 @@
-package com.ican.hgl.qnote.mvp.model;
+package com.ican.hgl.qnote.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;

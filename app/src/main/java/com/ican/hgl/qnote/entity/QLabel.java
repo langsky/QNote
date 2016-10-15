@@ -1,7 +1,13 @@
-package com.ican.hgl.qnote.mvp.model;
+package com.ican.hgl.qnote.entity;
+
+import com.ican.hgl.qnote.entity.DaoSession;
+import com.ican.hgl.qnote.entity.QLabelDao;
+import com.ican.hgl.qnote.entity.QNoteDao;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.JoinEntity;
+import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.ToMany;
 
@@ -14,38 +20,42 @@ import org.greenrobot.greendao.DaoException;
 /**
  * Created by hgl on 16-10-7.
  */
-@Entity(nameInDb = "CATEGORY")
-public class QCategory {
 
+@Entity(nameInDb = "LABEL")
+public class QLabel {
     @Id(autoincrement = true)
+    @Property(nameInDb = "_id")
     private long id;
 
     @Property(nameInDb = "title")
+    @NotNull
     private String title;
 
-    @ToMany(referencedJoinProperty = "categoryId")
-    private List<QNote> noteList;
+    @Property(nameInDb = "color")
+    private int colorId;
 
-    @Property(nameInDb = "description")
-    private String description;
+    @Property(nameInDb = "notes")
+    @ToMany
+    @JoinEntity(entity = QNoteJoinQLabel.class, sourceProperty = "labelId", targetProperty = "noteId")
+    private List<QNote> noteList;
 
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    @Generated(hash = 1973696476)
-    private transient QCategoryDao myDao;
+    @Generated(hash = 1634883792)
+    private transient QLabelDao myDao;
 
-    @Generated(hash = 217859969)
-    public QCategory(long id, String title, String description) {
+    @Generated(hash = 2034519521)
+    public QLabel(long id, @NotNull String title, int colorId) {
         this.id = id;
         this.title = title;
-        this.description = description;
+        this.colorId = colorId;
     }
 
-    @Generated(hash = 1558416683)
-    public QCategory() {
+    @Generated(hash = 1080010524)
+    public QLabel() {
     }
 
     public long getId() {
@@ -64,19 +74,19 @@ public class QCategory {
         this.title = title;
     }
 
-    public String getDescription() {
-        return this.description;
+    public int getColorId() {
+        return this.colorId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setColorId(int colorId) {
+        this.colorId = colorId;
     }
 
     /**
      * To-many relationship, resolved on first access (and after reset).
      * Changes to to-many relations are not persisted, make changes to the target entity.
      */
-    @Generated(hash = 201415897)
+    @Generated(hash = 1681070350)
     public List<QNote> getNoteList() {
         if (noteList == null) {
             final DaoSession daoSession = this.daoSession;
@@ -84,7 +94,7 @@ public class QCategory {
                 throw new DaoException("Entity is detached from DAO context");
             }
             QNoteDao targetDao = daoSession.getQNoteDao();
-            List<QNote> noteListNew = targetDao._queryQCategory_NoteList(id);
+            List<QNote> noteListNew = targetDao._queryQLabel_NoteList(id);
             synchronized (this) {
                 if (noteList == null) {
                     noteList = noteListNew;
@@ -137,9 +147,10 @@ public class QCategory {
     }
 
     /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1267400743)
+    @Generated(hash = 1067167331)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getQCategoryDao() : null;
+        myDao = daoSession != null ? daoSession.getQLabelDao() : null;
     }
+
 }
